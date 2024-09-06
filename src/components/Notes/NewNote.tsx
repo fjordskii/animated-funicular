@@ -12,11 +12,13 @@ type NewNoteInput = {
 export function NewNote() {
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const router = useRouter();
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<NewNoteInput>();
+
 	const onSubmit: SubmitHandler<NewNoteInput> = (data) => {
 		setIsSubmitting(true);
 

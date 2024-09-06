@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    container_name: 'template'
+    container_name: 'ideas'
     restart: unless-stopped
     image: 'postgres:13'
     ports:
