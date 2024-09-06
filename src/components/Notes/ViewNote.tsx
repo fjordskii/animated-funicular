@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
-import { Link } from '../ui/Link';
 
 type UserType = {
 	createdAt: string;
@@ -70,13 +69,7 @@ export function ViewNote({ noteId }: { noteId: any }) {
 	return (
 		<Container
 			title="Note"
-			action={
-				!error && note?.user.email === session?.user?.email ? (
-					<Button onClick={deleteNote}>Delete Note</Button>
-				) : (
-					<Link href="/notes">Go Back</Link>
-				)
-			}
+			action={<Button onClick={deleteNote}>Delete Note</Button>}
 		>
 			{note && <div className="prose-xl">{note.text}</div>}
 			{error && (

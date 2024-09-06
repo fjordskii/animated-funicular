@@ -32,7 +32,7 @@ export function ButtonOrLink({ href, preserveRedirect, ...props }: Props) {
 				  )}`
 				: href!;
 
-		return <Link href={finalHref}>{content}</Link>;
+		return <Link href={finalHref} legacyBehavior>{content}</Link>;
 	}
 
 	return content;
