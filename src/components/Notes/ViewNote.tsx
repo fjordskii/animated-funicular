@@ -47,11 +47,11 @@ export function ViewNote({ noteId }: { noteId: any }) {
 					setNote(data.note);
 				}
 			});
-	}, []);
+	}, [noteId]);
 
 	async function deleteNote() {
 		const res = await fetch('/api/v1/notes/delete', {
-			method: 'DELETE',
+			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
 			},

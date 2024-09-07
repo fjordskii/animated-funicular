@@ -7,24 +7,28 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) {
-	const session = await getServerSession(req, res, authOptions);
+	try {
+		const session = await getServerSession(req, res, authOptions);
 
-	const user = await prisma.user.findUnique({
-		where: {
-			email: session?.user?.email!,
-		},
-	});
-
-	if (user) {
-		await prisma.note.create({
-			data: {
-				text: req.body.text,
-				userId: user.id,
+		const user = await prisma.user.findUnique({
+			where: {
+				email: session?.user?.email!,
 			},
 		});
 
-		return res.status(201).end();
-	} else {
+		if (user) {
+			await prisma.note.create({
+				data: {
+					text: req.body.text,
+					title: req.body.title,
+					userId: user.id,
+				},
+			});
+
+			return res.status(201).end();
+		}
+	} catch (error) {
+		console.log(error);
 		return res.status(401).end();
 	}
 }

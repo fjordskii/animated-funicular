@@ -7,6 +7,7 @@ import { Link } from '../ui/Link';
 
 type NewNoteInput = {
 	text: string;
+	title: string;
 };
 
 export function NewNote() {
@@ -37,18 +38,33 @@ export function NewNote() {
 			.catch((err) => console.error(err))
 			.finally(() => setIsSubmitting(false));
 	};
+
 	return (
 		<Container title="New Note" action={<Link href="/notes">Go Back</Link>}>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<label>
 					<div className="font-medium text-gray-800 dark:text-gray-200 mb-1">
+						Note Title
+					</div>
+					<input
+						type="text"
+						className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-full rounded-md px-4 py-2 border focus:border-brand-600 focus:ring-brand-500 disabled:opacity-60"
+						{...register('title', { required: true, maxLength: 100 })} // Register title field
+					/>
+					{errors.title && (
+						<div className="text-sm text-red-500 font-bold">
+							{errors.title.message}
+						</div>
+					)}
+				</label>
+				<label>
+					<div className="font-medium text-gray-800 dark:text-gray-200 mb-1">
 						Note Text
 					</div>
 					<textarea
-						className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-full rounded-md px-4 py-2 border focus:border-brand-600 focus:ring-brand-500 disabled:opacity-60 disabled:opacity-60 disabled:bg-gray-500 disabled:bg-opacity-20"
+						className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 w-full rounded-md px-4 py-2 border focus:border-brand-600 focus:ring-brand-500 disabled:opacity-60"
 						{...register('text', { required: true, maxLength: 240 })}
 					/>
-
 					{errors.text && (
 						<div className="text-sm text-red-500 font-bold">
 							{errors.text.message}

@@ -58,3 +58,12 @@ The rest of the stuff listed was used to implement the features included in the 
 - Authenticated routes and data.
 - Pre-configured Next.js API routes
 
+## Production Deployment
+
+To deploy this application in production, ensure you have the following:
+
+- Use a managed PostgreSQL database service instead of the local Docker container.
+- Update the `.env` file with your production database connection string and other sensitive information.
+- Ensure that your application is secured with HTTPS and that sensitive data is not exposed.
+- Consider using a CDN for static assets and caching strategies for performance.
+
