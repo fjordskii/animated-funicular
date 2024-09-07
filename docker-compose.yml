@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    container_name: 'ideas'
+    container_name: 'budget-tracker'
     restart: unless-stopped
     image: 'postgres:13'
     ports:
@@ -10,7 +10,19 @@ services:
     volumes:
       - 'pgdata:/var/lib/postgresql/data/'
     environment:
-      POSTGRES_PASSWORD: postgres
+      DATABASE_URL: ${DATABASE_URL}
+      POSTGRES_PASSWORD: postgres 
+
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+    depends_on:
+      - postgres
 
 volumes:
   pgdata: {}
